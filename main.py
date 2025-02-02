@@ -31,8 +31,6 @@ def api(name: List[str] = Query(None)):
     # Collect results in the exact order of the query string
     results = []
     for n in name:
-        print("check for ", n)
-        print("is n ", n in data_dict)
         if n in data_dict:
             results.append(data_dict[n]["marks"])
 

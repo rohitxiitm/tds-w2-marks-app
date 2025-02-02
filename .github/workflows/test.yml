@@ -1,0 +1,13 @@
+name: Test for TDS
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 22f2001394@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
