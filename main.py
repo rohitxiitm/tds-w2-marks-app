@@ -16,15 +16,24 @@ app.add_middleware(
 
 
 @app.get("/api")
-def api(names: List[str] = Query(None)):
+def api(name: List[str] = Query(None)):
     # Read data from data.json file
     with open("data.json", "r") as f:
         data = json.load(f)
 
-    # If no names provided, return all data
-    if not names:
+    # If no names are provided, return all data
+    if not name:
         return data
 
-    # Filter data based on requested names
-    filtered_data = [item for item in data if item["name"] in names]
-    return filtered_data
+    # Build a dictionary for O(1) lookups
+    data_dict = {entry["name"]: entry for entry in data}
+
+    # Collect results in the exact order of the query string
+    results = []
+    for n in name:
+        print("check for ", n)
+        print("is n ", n in data_dict)
+        if n in data_dict:
+            results.append(data_dict[n]["marks"])
+
+    return {"marks": results}
